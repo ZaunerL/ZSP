@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.BackgroundTask;
 import model.Datenbank;
 
 import java.awt.GridLayout;
@@ -405,15 +406,12 @@ public class Bedienung extends JFrame {
 	private class BtnOkActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Datenbank.Speichern();
+			BackgroundTask.start();
 		}
 	}
 	private class BtnSearchActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			try {
-				Datenbank.readURL();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			BackgroundTask.read();
 		}
 	}
 }
