@@ -52,14 +52,18 @@ public class Bedienung extends JFrame {
 	private boolean wass;
 	private boolean gase = true;
 	private boolean stroeme;
+	private boolean date;
 	private JButton kommaBtn;
 	private boolean wassKomma = true;
 	private boolean gasKomma = true;
 	private boolean stromKomma = true;
+	private int dateKomma = 0;
 	public static JTextField textField;
 	private JButton btnOk;
 	private JButton btnDel;
 	private JButton btnSearch;
+	private JLabel lblDatum;
+	private static JTextField datefield;
 
 	/**
 	 * Launch the application.
@@ -155,7 +159,7 @@ public class Bedienung extends JFrame {
 		leftPanel = new JPanel();
 		leftPanel.setBackground(Color.WHITE);
 		contentPane.add(leftPanel, BorderLayout.CENTER);
-		leftPanel.setLayout(new MigLayout("", "[][grow][grow]", "[][][][][]"));
+		leftPanel.setLayout(new MigLayout("", "[][][grow][grow]", "[][][][][][][]"));
 
 		gas = new JLabel("Gas");
 		gas.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -182,6 +186,14 @@ public class Bedienung extends JFrame {
 		setStromfield(new JTextField());
 		getStromfield().addMouseListener(new StromfieldMouseListener());
 		leftPanel.add(getStromfield(), "cell 1 4,growx");
+		
+		lblDatum = new JLabel("Datum");
+		leftPanel.add(lblDatum, "cell 0 6");
+		
+		datefield = new JTextField();
+		datefield.addMouseListener(new DatefieldMouseListener());
+		leftPanel.add(datefield, "cell 1 6,growx");
+		datefield.setColumns(10);
 		getStromfield().setColumns(10);
 
 		textField = new JTextField();
@@ -209,6 +221,15 @@ public class Bedienung extends JFrame {
 	public static void setStromfield(JTextField stromfield) {
 		Bedienung.stromfield = stromfield;
 	}
+	
+	public static void setDatefield(JTextField datefield) {
+		Bedienung.datefield = datefield;
+	}
+	
+	public static JTextField getDatefield(){
+		return datefield;
+	}
+	
 	private class ButtonActionListener1 implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			//JButton btn = new JButton
@@ -220,6 +241,9 @@ public class Bedienung extends JFrame {
 			}
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn1.getText());
+			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn1.getText());
 			}
 		}
 	}
@@ -234,6 +258,9 @@ public class Bedienung extends JFrame {
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn2.getText());
 			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn2.getText());
+			}
 		}
 	}	
 	private class ButtonActionListener3 implements ActionListener{
@@ -246,6 +273,9 @@ public class Bedienung extends JFrame {
 			}
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn3.getText());
+			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn3.getText());
 			}
 		}
 	}
@@ -260,6 +290,9 @@ public class Bedienung extends JFrame {
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn4.getText());
 			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn4.getText());
+			}
 		}
 	}
 	private class ButtonActionListener5 implements ActionListener{
@@ -272,6 +305,9 @@ public class Bedienung extends JFrame {
 			}
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn5.getText());
+			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn5.getText());
 			}
 		}
 	}
@@ -286,6 +322,9 @@ public class Bedienung extends JFrame {
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn6.getText());
 			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn6.getText());
+			}
 		}
 	}
 	private class ButtonActionListener7 implements ActionListener{
@@ -298,6 +337,9 @@ public class Bedienung extends JFrame {
 			}
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn7.getText());
+			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn7.getText());
 			}
 		}
 	}
@@ -312,6 +354,9 @@ public class Bedienung extends JFrame {
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn8.getText());
 			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn8.getText());
+			}
 		}
 	}
 	private class ButtonActionListener9 implements ActionListener{
@@ -324,6 +369,9 @@ public class Bedienung extends JFrame {
 			}
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn9.getText());
+			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn9.getText());
 			}
 		}
 	}
@@ -338,6 +386,9 @@ public class Bedienung extends JFrame {
 			if(stroeme){
 				getStromfield().setText(getStromfield().getText() + btn0.getText());
 			}
+			if(date){
+				getDatefield().setText(getDatefield().getText() + btn0.getText());
+			}
 		}
 	}
 	private class TextFieldMouseListener extends MouseAdapter {
@@ -346,6 +397,7 @@ public class Bedienung extends JFrame {
 			gase = true;
 			wass = false;
 			stroeme = false;
+			date = false;
 		}
 	}
 	private class WassfieldMouseListener extends MouseAdapter {
@@ -354,6 +406,7 @@ public class Bedienung extends JFrame {
 			wass = true;
 			gase = false;
 			stroeme = false;
+			date = false;
 		}
 	}
 	private class StromfieldMouseListener extends MouseAdapter {
@@ -362,6 +415,7 @@ public class Bedienung extends JFrame {
 			stroeme = true;
 			wass = false;
 			gase = false;
+			date = false;
 		}
 	}
 	private class KommaBtnActionListener implements ActionListener {
@@ -384,6 +438,10 @@ public class Bedienung extends JFrame {
 				getStromfield().setText(getStromfield().getText() + kommaBtn.getText());
 				stromKomma = false;
 			}
+			if(date && (dateKomma < 3)){
+				getDatefield().setText(getDatefield().getText() + kommaBtn.getText());
+				dateKomma++;
+			}
 			else if(stroeme && !stromKomma){
 				textField.setText("Sie haben bereits ein Komma gesetzt");
 			}
@@ -405,13 +463,21 @@ public class Bedienung extends JFrame {
 	}
 	private class BtnOkActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Datenbank.Speichern();
 			BackgroundTask.start();
 		}
 	}
 	private class BtnSearchActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			BackgroundTask.read();
+		}
+	}
+	private class DatefieldMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			stroeme = false;
+			wass = false;
+			gase = false;
+			date = true;
 		}
 	}
 }

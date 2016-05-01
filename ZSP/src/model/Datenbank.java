@@ -10,29 +10,60 @@ import java.net.URL;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.SwingWorker;
 
 import view.Bedienung;
 
 public class Datenbank {
-	public static File meinText;
-	public static void Speichern(){
-		JFrame frame = new JFrame();
+	
 
-		JFileChooser dateiWahl = new JFileChooser();
-		dateiWahl.showSaveDialog(frame);
-		try {
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter(dateiWahl.getSelectedFile()));
-
-			writer.write(Bedienung.getGasfield().getText());
-			writer.write(Bedienung.getWassfield().getText());
-			writer.write(Bedienung.getStromfield().getText());
-			writer.close();
-
-		} catch(IOException ex) {
-			ex.printStackTrace();
+	
+	SwingWorker read = new Swingworker<Void, String>() {
+		
+		private void doRun(){
+			run.setEnabled(true);
+			cancel.setEnabled(false);
+			
+			read.cancel(true);
+			
 		}
-	}
 
+		protected Void doInBackground() throws Exception {
 
+			String wasser = Bedienung.getWassfield.getText();
+	        String strom = Bedieung.getStromfield.getText();
+	        String gas = Bedienung.getGasfield.getText();
+	        String date = Bedienung.getDatefield().getText();
+	        
+	        URL url = new URL("http://192.168.0.111:821/consumption?typ=wasser&date="+date+"&value="+wasser);
+	   
+	        try {
+	            url.openStream();            
+	        } catch(Exception e) {
+	            
+	        }
+
+		}
+		protected String Read() throws Exception {
+
+			String wasser;
+			String gas;
+			String strom;
+			  URL url = new URL("http://192.168.0.111:821/getconsumption?typ=wasser");
+		        BufferedReader reader = null;
+		        try {
+		            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+		            wasser = reader.readLine();
+		        } finally {
+		            if (reader != null) {
+		                reader.close();
+		            }
+		        }
+		}
+		protected void done(){
+			run.setEnabled(true);
+			cancel.setEnabled(false);
+		}
+		read.execute();
+	
 }
